@@ -36,5 +36,3 @@ location / {
      }
 }
 ```
-
-> Source: Michiel Kalkman, [https://michielkalkman.com/snippets/nginx-cors-open-configuration.html](https://michielkalkman.com/snippets/nginx-cors-open-configuration.html)
