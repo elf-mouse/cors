@@ -1,0 +1,33 @@
+# CORS on Apache
+
+To add the CORS authorization to the header using Apache, simply add the following line inside either the `<Directory>`, `<Location>`, `<Files>` or `<VirtualHost>` sections of your server config (usually located in a *.conf file, such as httpd.conf or apache.conf), or within a `.htaccess` file:
+
+```apache
+Header set Access-Control-Allow-Origin "*"
+```
+
+To ensure that your changes are correct, it is strongly recommended that you use
+
+```sh
+apachectl -t
+```
+
+to check your configuration changes for errors. After this passes, you may need to reload Apache to make sure your changes are applied by running the command
+
+```sh
+sudo service apache2 reload
+```
+
+or
+
+```sh
+apachectl -k graceful
+```
+
+Altering headers requires the use of [mod_headers](http://httpd.apache.org/docs/2.0/mod/mod_headers.html). Mod_headers is enabled by default in Apache, however, you may want to ensure it's enabled by run
+
+```
+a2enmod headers
+```
+
+> Note: you can also use `add` rather than `set`, but be aware that `add` can add the header multiple times, so it's likely safer to use set.
