@@ -17,6 +17,22 @@
         // parent.postMessage('message to be sent', 'http://the-website-that-will-receive-the-msg.com');
         parent.postMessage(JSON.stringify(data), '*');
       };
+
+      // get message from parent
+      var eventMethod = window.addEventListener
+        ? 'addEventListener'
+        : 'attachEvent';
+      var eventer = window[eventMethod];
+      var messageEvent =
+        eventMethod === 'attachEvent' ? 'onmessage' : 'message';
+
+      eventer(messageEvent, function(e) {
+        // if (e.origin !== 'http://the-trusted-iframe-origin.com') return;
+
+        try {
+          console.log(e.data);
+        } catch (e) {}
+      });
     </script>
   </body>
 </html>
